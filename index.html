@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Chat Surprise ❤️</title>
+
+<style>
+body {
+  margin:0;
+  font-family: Arial, sans-serif;
+  background:#e5ddd5;
+}
+
+/* Chat Screen */
+#chatScreen {
+  max-width:400px;
+  margin:30px auto;
+  background:white;
+  border-radius:12px;
+  overflow:hidden;
+  box-shadow:0 0 10px rgba(0,0,0,0.2);
+}
+
+.header {
+  background:#075E54;
+  color:white;
+  padding:15px;
+  font-weight:bold;
+}
+
+.chat {
+  padding:10px;
+  height:400px;
+  overflow-y:auto;
+}
+
+.msg {
+  padding:10px;
+  margin:8px 0;
+  border-radius:10px;
+  width:fit-content;
+  max-width:80%;
+}
+
+.me {
+  background:#DCF8C6;
+  margin-left:auto;
+}
+
+.her {
+  background:#fff;
+  border:1px solid #ddd;
+}
+
+/* Valentine Screen */
+#valentineScreen {
+  display:none;
+  text-align:center;
+  margin-top:100px;
+}
+
+button {
+  padding:12px 20px;
+  font-size:18px;
+  border:none;
+  border-radius:8px;
+  position:absolute;
+  cursor:pointer;
+}
+
+#yesBtn {
+  background:#4CAF50;
+  color:white;
+  left:40%;
+  top:60%;
+}
+
+#noBtn {
+  background:#f44336;
+  color:white;
+  left:55%;
+  top:60%;
+}
+</style>
+</head>
+
+<body>
+
+<div id="chatScreen">
+  <div class="header">❤️ My Favorite Person</div>
+  <div class="chat" id="chatBox"></div>
+</div>
+
+<div id="valentineScreen">
+  <h1>Will you be my Valentine? 💘</h1>
+  <button id="yesBtn" onclick="yes()">Yes ❤️</button>
+  <button id="noBtn">No 😢</button>
+</div>
+
+<script>
+const messages = [
+  {text:"Hey 🙂", type:"me"},
+  {text:"I wanted to ask you something...", type:"me"},
+  {text:"But promise you won't laugh 😅", type:"me"},
+  {text:"Okay ready?", type:"me"}
+];
+
+let i = 0;
+const chatBox = document.getElementById("chatBox");
+
+function showMessages(){
+  if(i < messages.length){
+    const msg = document.createElement("div");
+    msg.className = "msg " + messages[i].type;
+    msg.innerText = messages[i].text;
+    chatBox.appendChild(msg);
+    chatBox.scrollTop = chatBox.scrollHeight;
+    i++;
+    setTimeout(showMessages,1500);
+  } else {
+    setTimeout(showValentine,2000);
+  }
+}
+
+function showValentine(){
+  document.getElementById("chatScreen").style.display="none";
+  document.getElementById("valentineScreen").style.display="block";
+}
+
+function yes(){
+  document.body.innerHTML="<h1 style='text-align:center;margin-top:100px;'>Yayyyy ❤️😍</h1>";
+}
+
+const noBtn = document.getElementById("noBtn");
+
+noBtn.addEventListener("mouseover", function(){
+  const x = Math.random()*(window.innerWidth-100);
+  const y = Math.random()*(window.innerHeight-50);
+  noBtn.style.left=x+"px";
+  noBtn.style.top=y+"px";
+});
+
+showMessages();
+</script>
+
+</body>
+</html>
